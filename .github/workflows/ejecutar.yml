@@ -1,4 +1,4 @@
-name: Ejecutar java
+name: Ejecutar Java
 
 on:
   push:
@@ -7,11 +7,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Ejecutar java
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Compilar código Java
         run: |
+          mkdir -p out
           javac -d out src/*.java
-          jar cfe Main.jar Main *.class
+
+      - name: Crear archivo JAR
+        run: |
+          cd out
+          jar cfe app.jar Main *.class
+          cd ..
+
+      - name: Ejecutar el programa
+        run: |
           java -jar out/app.jar
-          
