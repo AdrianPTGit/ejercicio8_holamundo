@@ -12,6 +12,6 @@ jobs:
       - name: Ejecutar java
         run: |
           javac –d out src/*.java
-          jar cfe nombre_archivo.jar Main *.class
-          java -jar out/Main.jar
-          upload-artifact
+          jar cfe Main.jar Main *.class
+          java -jar out/app.jar
+          
